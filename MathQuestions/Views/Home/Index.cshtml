@@ -1,0 +1,31 @@
+﻿
+@model MathQuestions.Models.Concrete.QuestionContainer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @for (int i = 0; i < Model.NumberOfQuestions; ++i)
+            {
+                MathQuestions.Models.Abstract.IMathQuestion q = Model.GetNextQuestion();
+                <div style="border: 2px solid black; font-family: sans-serif; padding: 20px; margin: 5px;">
+                    <h4>@(i + 1). @q.QuestionText</h4>
+                    <strong>Answer:</strong> <input type="text" value="@q.QuestionAnswer.ToString()" name="answer@(i)"/>
+                </div>
+            }
+            <input type="submit" name="submit" value="Submit Answers" />
+        }
+    </div>
+</body>
+</html>
